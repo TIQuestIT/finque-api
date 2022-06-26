@@ -5,7 +5,6 @@ name = "pypi"
 
 [packages]
 flask = "*"
-hydra-core = "*"
 flask-restful = "*"
 flask-sqlalchemy = "*"
 flask-marshmallow = "*"
