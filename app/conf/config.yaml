@@ -1,8 +1,0 @@
-app:
-  debug: true
-  port: 5000
-  secret_key: ASecretKeyApp
-db:
-  database_uri: sqlite:///data.db
-jwt:
-  secret_key: ASecretKeyJWT

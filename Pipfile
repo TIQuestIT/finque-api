@@ -11,6 +11,9 @@ flask-sqlalchemy = "*"
 flask-marshmallow = "*"
 marshmallow-sqlalchemy = "*"
 uuid = "*"
+babel = "*"
+flask-babel = "*"
+python-dotenv = "*"
 
 [dev-packages]
 black = "*"

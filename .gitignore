@@ -1,6 +1,9 @@
 # hydra outputs
 outputs
 
+# sqlite database
+app/data.db
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
