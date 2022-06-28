@@ -1,13 +1,17 @@
-import uuid
 from typing import List
+from uuid import uuid4
 
-from db import db
+from core.db import db
+
+
+def _get_uuid():
+    return uuid4().hex
 
 
 class CustomerModel(db.Model):
     __tablename__ = "customers"
 
-    id = db.Column(db.String, primary_key=True, default=uuid.uuid4)
+    id = db.Column(db.String, primary_key=True, default=_get_uuid)
     customer_number = db.Column(db.Integer, nullable=False, unique=True)
     company = db.Column(db.String, nullable=False, unique=True)
     street = db.Column(db.String, nullable=True)

@@ -1,11 +1,10 @@
-from ma import ma
-from models.customer import CustomerModel
+from api.models.customer import CustomerModel
+from core.ma import ma
 
 
 class CustomerSchema(ma.SQLAlchemyAutoSchema):
     class Meta:
         model = CustomerModel
-        # load_only = ()
         dump_only = ("id",)
         include_fk = True
         load_instance = True

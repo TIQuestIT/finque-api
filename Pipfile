@@ -5,7 +5,6 @@ name = "pypi"
 
 [packages]
 flask = "*"
-flask-restful = "*"
 flask-sqlalchemy = "*"
 flask-marshmallow = "*"
 marshmallow-sqlalchemy = "*"
@@ -13,6 +12,12 @@ uuid = "*"
 babel = "*"
 flask-babel = "*"
 python-dotenv = "*"
+flask-bcrypt = "*"
+flask-migrate = "*"
+pyjwt = "*"
+flask-script = "*"
+flask-testing = "*"
+flask-restx = "*"
 
 [dev-packages]
 black = "*"
