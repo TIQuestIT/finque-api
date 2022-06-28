@@ -1,8 +1,11 @@
+# VSCode
+.vscode
+
 # hydra outputs
 outputs
 
 # sqlite database
-app/data.db
+app/*.db
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
