@@ -2,7 +2,6 @@ from typing import Any, Dict, Tuple
 
 from api.models.customer import CustomerModel
 from api.schemas.customer import CustomerSchema
-from flask import jsonify, request
 from flask_babel import gettext
 from flask_restx import Namespace, Resource, fields
 
@@ -38,8 +37,7 @@ class CustomerCollection(Resource):
     def post(cls) -> Tuple[Dict, int]:
         payload: Any = api.payload
 
-        customer = CustomerModel.find_by_customer_number(payload["customer_number"])
-        if customer:
+        if CustomerModel.find_by_customer_number(payload["customer_number"]):
             return {"message": gettext("Customer already exists.")}, 400
 
         customer = customer_schema.load(payload)
@@ -50,7 +48,24 @@ class CustomerCollection(Resource):
             return {
                 "message": gettext("Error insterting customer"),
             }, 500
-        return customer_schema.dump(customer), 201
+        return customer_schema.dump(customer), 201  # type: ignore
+
+    @classmethod
+    @api.expect(customer_fields)
+    def put(cls) -> Tuple[Dict, int]:
+        payload: Dict[Any, Any] = api.payload  # type: ignore
+
+        customer = CustomerModel.find_by_customer_number(payload["customer_number"])
+
+        for key, _ in payload.items():
+            setattr(customer, key, payload[key])
+
+        try:
+            customer.save_to_db()
+        except:
+            return {"message": gettext("Error updating customer")}, 500
+
+        return customer_schema.dump(customer), 200  # type: ignore
 
 
 @api.route("/<int:customer_number>")
@@ -63,3 +78,12 @@ class CustomerItem(Resource):
             return customer_schema.dump(customer), 200  # type: ignore
 
         return {"message": gettext("Customer not found.")}, 404
+
+    @classmethod
+    def delete(cls, customer_number: int) -> Tuple[Dict, int]:
+        customer = CustomerModel.find_by_customer_number(customer_number)
+
+        if customer:
+            customer.delete_from_db()
+
+        return {"message": gettext("Customer deleted.")}, 410
