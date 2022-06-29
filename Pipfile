@@ -18,6 +18,7 @@ pyjwt = "*"
 flask-script = "*"
 flask-testing = "*"
 flask-restx = "*"
+flask-security-too = "*"
 
 [dev-packages]
 black = "*"
