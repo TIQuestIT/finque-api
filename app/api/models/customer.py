@@ -9,7 +9,7 @@ def _get_uuid():
 
 
 class CustomerModel(db.Model):
-    __tablename__ = "customers"
+    __tablename__ = "customer"
 
     id = db.Column(db.String, primary_key=True, default=_get_uuid)
     customer_number = db.Column(db.Integer, nullable=False, unique=True)
