@@ -11,7 +11,6 @@ class Config:
     """General config settings for flask."""
 
     PORT = getenv("PORT", 5000)
-    SECRET_KEY = getenv("SECRET_KEY", "my_precious_secret_key")
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     PROPAGATE_EXCEPTIONS = True
     JWT_BLACKLIST_ENABLED = True
@@ -25,8 +24,10 @@ class DevelopmentConfig(Config):
     SQLALCHEMY_DATABASE_URI = "sqlite:///" + path.join(
         basedir, "flask_boilerplate_dev.db"
     )
-    SQLALCHEMY_TRACK_MODIFICATIONS = False
     JWT_SECRET_KEY = getenv("JWT_SECRET_KEY", "my_precious_jwt_key")
+    SECURITY_PASSWORD_SALT = getenv(
+        "SECURITY_PASSWORD_SALT", "146585145368132386173505678016728509634"
+    )
 
 
 class TestingConfig(Config):
@@ -35,17 +36,18 @@ class TestingConfig(Config):
     SQLALCHEMY_DATABASE_URI = "sqlite:///" + path.join(
         basedir, "flask_boilerplate_test.db"
     )
-    PRESERVE_CONTEXT_ON_EXCEPTION = False
-    SQLALCHEMY_TRACK_MODIFICATIONS = False
     JWT_SECRET_KEY = getenv("JWT_SECRET_KEY", "my_precious_jwt_key")
+    PRESERVE_CONTEXT_ON_EXCEPTION = False
+    SECURITY_PASSWORD_SALT = getenv(
+        "SECURITY_PASSWORD_SALT", "146585145368132386173505678016728509635"
+    )
 
 
 class ProductionConfig(Config):
     DEBUG = False
     SQLALCHEMY_DATABASE_URI = getenv("SQLALCHEMY_DATABASE_URI")
-    JWT_SECRET_KEY = getenv("JWT_SECRET_KEY", "my_precious_jwt_key")
+    JWT_SECRET_KEY = getenv("JWT_SECRET_KEY")
+    SECURITY_PASSWORD_SALT = getenv("SECURITY_PASSWORD_SALT")
 
 
 config_by_name = dict(dev=DevelopmentConfig, test=TestingConfig, prod=ProductionConfig)
-
-key = Config.SECRET_KEY
