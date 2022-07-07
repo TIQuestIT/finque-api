@@ -22,11 +22,11 @@ class RoleSchema(ma.SQLAlchemyAutoSchema):
 
 
 class UserSchema(ma.SQLAlchemyAutoSchema):
-    # roles = fields.Nested(RolesUsersSchema, many=True)
+    roles = fields.Nested(RoleSchema, many=True, exclude=("description",))
 
     class Meta:
         model = UserModel
-        dump_only = ("id",)
+        dump_only = ("id", "fs_uniquifier")
         load_only = ("password",)
         inklude_fk = True
         include_relationships = True
