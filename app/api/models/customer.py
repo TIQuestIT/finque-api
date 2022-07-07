@@ -4,14 +4,10 @@ from uuid import uuid4
 from core.db import db
 
 
-def _get_uuid():
-    return uuid4().hex
-
-
 class CustomerModel(db.Model):
     __tablename__ = "customer"
 
-    id = db.Column(db.String, primary_key=True, default=_get_uuid)
+    id = db.Column(db.Integer, primary_key=True)
     customer_number = db.Column(db.Integer, nullable=False, unique=True)
     company = db.Column(db.String, nullable=False, unique=True)
     street = db.Column(db.String, nullable=True)
