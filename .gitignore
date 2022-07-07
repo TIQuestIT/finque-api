@@ -1,6 +1,9 @@
 # VSCode
 .vscode
 
+# PostgresDB
+pgdb
+
 # hydra outputs
 outputs
 
