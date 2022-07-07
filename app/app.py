@@ -3,11 +3,13 @@ from os import getenv
 from flask import Flask
 
 from api import api
+from api.models.user import user_datastore
 from config import config_by_name
 from core.babel import babel
 from core.bcrypt import flask_bcrypt
 from core.db import db
 from core.ma import ma
+from core.security import security
 
 
 def create_app(config_name):
@@ -17,6 +19,7 @@ def create_app(config_name):
     ma.init_app(app)
     flask_bcrypt.init_app(app)
     babel.init_app(app)
+    security.init_app(app, user_datastore, register_blueprint=False)
     api.init_app(app)
 
     return app
