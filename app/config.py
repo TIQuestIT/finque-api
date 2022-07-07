@@ -21,10 +21,9 @@ class Config:
 
 class DevelopmentConfig(Config):
     DEBUG = True
-    SQLALCHEMY_DATABASE_URI = "sqlite:///" + path.join(
-        basedir, "flask_boilerplate_dev.db"
-    )
-    JWT_SECRET_KEY = getenv("JWT_SECRET_KEY", "my_precious_jwt_key")
+    SQLALCHEMY_DATABASE_URI = "postgresql://finque_dev:finque_dev@localhost/finque_dev"
+    SECRET_KEY = getenv("SECRET_KEY", "my_precious_dev_key")
+    JWT_SECRET_KEY = getenv("JWT_SECRET_KEY", "my_precious_jwt_dev_key")
     SECURITY_PASSWORD_SALT = getenv(
         "SECURITY_PASSWORD_SALT", "146585145368132386173505678016728509634"
     )
@@ -33,10 +32,11 @@ class DevelopmentConfig(Config):
 class TestingConfig(Config):
     DEBUG = True
     TESTING = True
-    SQLALCHEMY_DATABASE_URI = "sqlite:///" + path.join(
-        basedir, "flask_boilerplate_test.db"
+    SQLALCHEMY_DATABASE_URI = (
+        "postgresql://finque_test:finque_test@localhost/finque_test"
     )
-    JWT_SECRET_KEY = getenv("JWT_SECRET_KEY", "my_precious_jwt_key")
+    SECRET_KEY = getenv("SECRET_KEY", "my_precious_testing_key")
+    JWT_SECRET_KEY = getenv("JWT_SECRET_KEY", "my_precious_jwt_testing_key")
     PRESERVE_CONTEXT_ON_EXCEPTION = False
     SECURITY_PASSWORD_SALT = getenv(
         "SECURITY_PASSWORD_SALT", "146585145368132386173505678016728509635"
