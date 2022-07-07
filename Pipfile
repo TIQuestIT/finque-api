@@ -19,6 +19,8 @@ flask-script = "*"
 flask-testing = "*"
 flask-restx = "*"
 flask-security-too = "*"
+psycopg2 = "*"
+itsdangerous = "*"
 
 [dev-packages]
 black = "*"
